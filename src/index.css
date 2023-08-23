@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --Strong-cyan: hsl(172, 67%, 45%);
+  --Strong-light-cyan: hsl(173, 64%, 72%);
+  --Very-dark-cyan: hsl(183, 100%, 15%);
+  --Dark-grayish-cyan: hsl(186, 14%, 43%);
+  --Grayish-cyan: hsl(184, 14%, 56%);
+  --Light-grayish-cyan: hsl(185, 41%, 84%);
+  --Very-light-grayish-cyan: hsl(189, 41%, 97%);
+  --White: hsl(0, 0%, 100%);
+}
+
+body {
+  font-family: "Space Mono", monospace;
+  background: var(--Light-grayish-cyan);
+  color: var(--Dark-grayish-cyan);
+  font-size: 1.5rem;
+}
+
+form {
+  color: var(--Very-dark-cyan);
+  /* background-color: var(--Light-grayish-cyan); */
+}
+input {
+  border-radius: 0.3rem;
+  background-color: var(--Very-light-grayish-cyan);
+  text-align: right;
+  padding: 0.2rem;
+  border: 2px solid var(--Very-light-grayish-cyan);
+  /* padding-right: 1rem; */
+}
+input:hover {
+  border: 2px solid var(--Strong-cyan);
+  cursor: pointer;
+}
+
+label,
+h2 {
+  font-size: 1rem;
+  color: var(--Dark-grayish-cyan);
+}
+button {
+  background-color: rgb(0, 94, 62);
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  color: var(--Very-light-grayish-cyan);
+  background: var(--Very-dark-cyan);
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: var(--Strong-light-cyan);
+  color: var(--Very-dark-cyan);
+}
