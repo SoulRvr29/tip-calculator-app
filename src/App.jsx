@@ -9,8 +9,8 @@ function App() {
           />
         </svg>
       </header>
-      <main className="bg-white rounded-[2rem]">
-        <section className="bg-White m-8">
+      <main className="bg-white rounded-[2rem] grid grid-cols-2 max-[700px]:grid-cols-1 mx-4 max-[700px]:mx-0">
+        <section className="bg-White m-8 max-w-[395px]">
           <form action="#">
             <label htmlFor="cost">Bill</label>
             <div className="relative flex justify-between items-center bg-Very-light-grayish-cyan rounded-md">
@@ -26,7 +26,7 @@ function App() {
                 />
               </svg>
               <input
-                className="w-full placeholder-Very-dark-cyan pr-4"
+                className="w-full placeholder-Very-dark-cyan pr-4 "
                 type="text"
                 name="cost"
                 id="cost"
@@ -50,10 +50,13 @@ function App() {
                 placeholder="Custom"
               />
             </form>
-            <label htmlFor="people">Number of People</label>
+            <label htmlFor="people">Number of People</label>{" "}
             <div className="relative flex justify-between items-center bg-Very-light-grayish-cyan rounded-md">
+              <span className="hidden absolute right-0 -top-7 text-orange-500">
+                Can't be zero
+              </span>
               <svg
-                className="ml-4"
+                className="ml-4 absolute"
                 xmlns="http://www.w3.org/2000/svg"
                 width="13"
                 height="16"
@@ -73,7 +76,7 @@ function App() {
             </div>
           </div>
         </section>
-        <section className="bg-Very-dark-cyan m-8 rounded-2xl p-6">
+        <section className="bg-Very-dark-cyan m-8 rounded-2xl p-6 max-w-[395px] grid">
           <div id="amount" className="flex justify-between pt-4">
             <div>
               <h3 className="text-Very-light-grayish-cyan text-base">
@@ -85,7 +88,10 @@ function App() {
               0
             </div>
           </div>
-          <div id="total" className="flex justify-between py-8">
+          <div
+            id="total"
+            className="flex justify-between py-8 -mt-16 max-[700px]:mt-0"
+          >
             <div>
               <h3 className="text-Very-light-grayish-cyan text-base">Total</h3>
               <p className="text-Grayish-cyan text-sm">/ person</p>
@@ -94,7 +100,7 @@ function App() {
               0
             </div>
           </div>
-          <button className="bg-Strong-cyan text-Very-dark-cyan text-lg w-full">
+          <button className="bg-Strong-cyan text-Very-dark-cyan text-lg w-full place-self-end">
             RESET
           </button>
         </section>

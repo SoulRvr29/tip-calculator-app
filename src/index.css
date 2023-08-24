@@ -38,7 +38,8 @@ input:hover {
 }
 
 label,
-h2 {
+h2,
+span {
   font-size: 1rem;
   color: var(--Dark-grayish-cyan);
 }
