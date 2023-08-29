@@ -11,6 +11,7 @@
   --Light-grayish-cyan: hsl(185, 41%, 84%);
   --Very-light-grayish-cyan: hsl(189, 41%, 97%);
   --White: hsl(0, 0%, 100%);
+  --error: rgb(236, 126, 52);
 }
 
 body {
@@ -44,7 +45,6 @@ span {
   color: var(--Dark-grayish-cyan);
 }
 button {
-  background-color: rgb(0, 94, 62);
   padding: 0.4rem;
   border-radius: 0.3rem;
   color: var(--Very-light-grayish-cyan);

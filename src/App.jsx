@@ -1,4 +1,31 @@
+import { useState } from "react";
+
 function App() {
+  const [bill, setBill] = useState(0);
+  const [peopleNr, setPeopleNr] = useState(0);
+  const [percent, setPercent] = useState(0);
+
+  const [tipAmount, setTipAmount] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  const handleSubmit = (e) => {
+    console.log(percent);
+    e.preventDefault();
+    if (bill != 0 && peopleNr !== 0) {
+      setTotal(
+        "$" + Math.round(((bill + bill * percent) / peopleNr) * 100) / 100
+      );
+      setTipAmount("$" + Math.round(((bill * percent) / peopleNr) * 100) / 100);
+    }
+  };
+
+  const resetHandler = () => {
+    window.location.reload(true);
+    // setBill(0);
+    // setPeopleNr(0);
+    // setPercent(0);
+  };
+
   return (
     <div className="grid justify-center">
       <header className="p-[3rem] mx-auto">
@@ -14,6 +41,12 @@ function App() {
           <form action="#">
             <label htmlFor="cost">Bill</label>
             <div className="relative flex justify-between items-center bg-Very-light-grayish-cyan rounded-md">
+              <span
+                className="hidden absolute right-0 -top-7 text-error"
+                style={bill == 0 ? { display: "block" } : { display: "none" }}
+              >
+                Can't be zero
+              </span>
               <svg
                 className="ml-4 absolute"
                 xmlns="http://www.w3.org/2000/svg"
@@ -26,23 +59,129 @@ function App() {
                 />
               </svg>
               <input
-                className="w-full placeholder-Very-dark-cyan pr-4 "
+                style={
+                  peopleNr == 0
+                    ? { borderColor: "var(--error)" }
+                    : { borderColor: "var(--Very-light-grayish-cyan)" }
+                }
+                className="w-full pr-4  text-Very-dark-cyan"
+                onChange={(e) => setBill(Number.parseFloat(e.target.value))}
                 type="text"
                 name="cost"
                 id="cost"
                 placeholder="0"
+                onClick={(e) => (e.target.value = null)}
               />
             </div>
           </form>
           <div>
             <h2 className="mb-3 mt-7">Select Tip %</h2>
             <form className="grid grid-cols-2 gap-4 mb-4">
-              <button>5%</button>
-              <button>10%</button>
-              <button>15%</button>
-              <button>25%</button>
-              <button>50%</button>
+              <button
+                style={
+                  percent == "0.05"
+                    ? {
+                        color: "var(--Very-dark-cyan)",
+                        background: "var(--Strong-cyan)",
+                      }
+                    : {
+                        background: "var(--Very-dark-cyan)",
+                        color: "var(--Very-light-grayish-cyan)",
+                      }
+                }
+                id="5"
+                onClick={(e) => {
+                  setPercent(0.05);
+                  handleSubmit(e);
+                }}
+              >
+                5%
+              </button>
+              <button
+                style={
+                  percent == "0.1"
+                    ? {
+                        color: "var(--Very-dark-cyan)",
+                        background: "var(--Strong-cyan)",
+                      }
+                    : {
+                        background: "var(--Very-dark-cyan)",
+                        color: "var(--Very-light-grayish-cyan)",
+                      }
+                }
+                id="10"
+                onClick={(e) => {
+                  setPercent(0.1);
+                  handleSubmit(e);
+                }}
+              >
+                10%
+              </button>
+              <button
+                style={
+                  percent == "0.15"
+                    ? {
+                        color: "var(--Very-dark-cyan)",
+                        background: "var(--Strong-cyan)",
+                      }
+                    : {
+                        background: "var(--Very-dark-cyan)",
+                        color: "var(--Very-light-grayish-cyan)",
+                      }
+                }
+                id="15"
+                onClick={(e) => {
+                  setPercent(0.15);
+                  handleSubmit(e);
+                }}
+              >
+                15%
+              </button>
+              <button
+                style={
+                  percent == "0.25"
+                    ? {
+                        color: "var(--Very-dark-cyan)",
+                        background: "var(--Strong-cyan)",
+                      }
+                    : {
+                        background: "var(--Very-dark-cyan)",
+                        color: "var(--Very-light-grayish-cyan)",
+                      }
+                }
+                id="25"
+                onClick={(e) => {
+                  setPercent(0.25);
+                  handleSubmit(e);
+                }}
+              >
+                25%
+              </button>
+              <button
+                style={
+                  percent == "0.5"
+                    ? {
+                        color: "var(--Very-dark-cyan)",
+                        background: "var(--Strong-cyan)",
+                      }
+                    : {
+                        background: "var(--Very-dark-cyan)",
+                        color: "var(--Very-light-grayish-cyan)",
+                      }
+                }
+                id="50"
+                onClick={(e) => {
+                  setPercent(0.5);
+                  handleSubmit(e);
+                }}
+              >
+                50%
+              </button>
               <input
+                onChange={(e) => {
+                  setPercent(e.target.value / 100);
+                  handleSubmit(e);
+                }}
                 className=" pr-4 placeholder-Dark-grayish-cyan"
                 type="text"
                 name="custom"
@@ -52,7 +191,12 @@ function App() {
             </form>
             <label htmlFor="people">Number of People</label>{" "}
             <div className="relative flex justify-between items-center bg-Very-light-grayish-cyan rounded-md">
-              <span className="hidden absolute right-0 -top-7 text-orange-500">
+              <span
+                className="hidden absolute right-0 -top-7 text-error"
+                style={
+                  peopleNr == 0 ? { display: "block" } : { display: "none" }
+                }
+              >
                 Can't be zero
               </span>
               <svg
@@ -67,7 +211,14 @@ function App() {
                 />
               </svg>
               <input
-                className="pr-4 flex w-full placeholder-Very-dark-cyan"
+                className="pr-4 flex w-full text-Very-dark-cyan"
+                style={
+                  peopleNr == 0
+                    ? { borderColor: "var(--error)" }
+                    : { borderColor: "var(--Very-light-grayish-cyan)" }
+                }
+                onChange={(e) => setPeopleNr(Number.parseFloat(e.target.value))}
+                onClick={(e) => (e.target.value = null)}
                 type="text"
                 name="people"
                 id="people"
@@ -85,7 +236,7 @@ function App() {
               <p className="text-Grayish-cyan text-sm">/ person</p>
             </div>
             <div id="tip-amount" className="text-Strong-cyan text-4xl">
-              0
+              {tipAmount}
             </div>
           </div>
           <div
@@ -97,10 +248,13 @@ function App() {
               <p className="text-Grayish-cyan text-sm">/ person</p>
             </div>
             <div id="total" className="text-Strong-cyan text-4xl">
-              0
+              {total}
             </div>
           </div>
-          <button className="bg-Strong-cyan text-Very-dark-cyan text-lg w-full place-self-end">
+          <button
+            onClick={() => resetHandler()}
+            className="bg-Strong-cyan text-Very-dark-cyan text-lg w-full place-self-end"
+          >
             RESET
           </button>
         </section>
