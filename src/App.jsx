@@ -3,27 +3,30 @@ import { useState } from "react";
 function App() {
   const [bill, setBill] = useState(0);
   const [peopleNr, setPeopleNr] = useState(0);
-  const [percent, setPercent] = useState(0);
-
   const [tipAmount, setTipAmount] = useState(0);
   const [total, setTotal] = useState(0);
+  const [percent, setPercent] = useState(0);
+
+  let actualPercent = 0;
+  const setActualPercent = (newPercent) => {
+    actualPercent = newPercent;
+    setPercent(actualPercent);
+  };
 
   const handleSubmit = (e) => {
-    console.log(percent);
     e.preventDefault();
     if (bill != 0 && peopleNr !== 0) {
       setTotal(
-        "$" + Math.round(((bill + bill * percent) / peopleNr) * 100) / 100
+        "$" + Math.round(((bill + bill * actualPercent) / peopleNr) * 100) / 100
       );
-      setTipAmount("$" + Math.round(((bill * percent) / peopleNr) * 100) / 100);
+      setTipAmount(
+        "$" + Math.round(((bill * actualPercent) / peopleNr) * 100) / 100
+      );
     }
   };
 
   const resetHandler = () => {
     window.location.reload(true);
-    // setBill(0);
-    // setPeopleNr(0);
-    // setPercent(0);
   };
 
   return (
@@ -41,12 +44,6 @@ function App() {
           <form action="#">
             <label htmlFor="cost">Bill</label>
             <div className="relative flex justify-between items-center bg-Very-light-grayish-cyan rounded-md">
-              <span
-                className="hidden absolute right-0 -top-7 text-error"
-                style={bill == 0 ? { display: "block" } : { display: "none" }}
-              >
-                Can't be zero
-              </span>
               <svg
                 className="ml-4 absolute"
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,13 +56,11 @@ function App() {
                 />
               </svg>
               <input
-                style={
-                  peopleNr == 0
-                    ? { borderColor: "var(--error)" }
-                    : { borderColor: "var(--Very-light-grayish-cyan)" }
-                }
                 className="w-full pr-4  text-Very-dark-cyan"
-                onChange={(e) => setBill(Number.parseFloat(e.target.value))}
+                onChange={(e) => {
+                  setBill(Number.parseFloat(e.target.value));
+                  handleSubmit(e);
+                }}
                 type="text"
                 name="cost"
                 id="cost"
@@ -79,7 +74,7 @@ function App() {
             <form className="grid grid-cols-2 gap-4 mb-4">
               <button
                 style={
-                  percent == "0.05"
+                  percent == 0.05
                     ? {
                         color: "var(--Very-dark-cyan)",
                         background: "var(--Strong-cyan)",
@@ -91,7 +86,7 @@ function App() {
                 }
                 id="5"
                 onClick={(e) => {
-                  setPercent(0.05);
+                  setActualPercent(0.05);
                   handleSubmit(e);
                 }}
               >
@@ -99,7 +94,7 @@ function App() {
               </button>
               <button
                 style={
-                  percent == "0.1"
+                  percent == 0.1
                     ? {
                         color: "var(--Very-dark-cyan)",
                         background: "var(--Strong-cyan)",
@@ -111,7 +106,7 @@ function App() {
                 }
                 id="10"
                 onClick={(e) => {
-                  setPercent(0.1);
+                  setActualPercent(0.1);
                   handleSubmit(e);
                 }}
               >
@@ -119,7 +114,7 @@ function App() {
               </button>
               <button
                 style={
-                  percent == "0.15"
+                  percent == 0.15
                     ? {
                         color: "var(--Very-dark-cyan)",
                         background: "var(--Strong-cyan)",
@@ -131,7 +126,7 @@ function App() {
                 }
                 id="15"
                 onClick={(e) => {
-                  setPercent(0.15);
+                  setActualPercent(0.15);
                   handleSubmit(e);
                 }}
               >
@@ -139,7 +134,7 @@ function App() {
               </button>
               <button
                 style={
-                  percent == "0.25"
+                  percent == 0.25
                     ? {
                         color: "var(--Very-dark-cyan)",
                         background: "var(--Strong-cyan)",
@@ -151,7 +146,7 @@ function App() {
                 }
                 id="25"
                 onClick={(e) => {
-                  setPercent(0.25);
+                  setActualPercent(0.25);
                   handleSubmit(e);
                 }}
               >
@@ -159,7 +154,7 @@ function App() {
               </button>
               <button
                 style={
-                  percent == "0.5"
+                  percent == 0.5
                     ? {
                         color: "var(--Very-dark-cyan)",
                         background: "var(--Strong-cyan)",
@@ -171,7 +166,7 @@ function App() {
                 }
                 id="50"
                 onClick={(e) => {
-                  setPercent(0.5);
+                  setActualPercent(0.5);
                   handleSubmit(e);
                 }}
               >
@@ -179,9 +174,10 @@ function App() {
               </button>
               <input
                 onChange={(e) => {
-                  setPercent(e.target.value / 100);
+                  setActualPercent(e.target.value / 100);
                   handleSubmit(e);
                 }}
+                onClick={(e) => (e.target.value = null)}
                 className=" pr-4 placeholder-Dark-grayish-cyan"
                 type="text"
                 name="custom"
@@ -194,7 +190,9 @@ function App() {
               <span
                 className="hidden absolute right-0 -top-7 text-error"
                 style={
-                  peopleNr == 0 ? { display: "block" } : { display: "none" }
+                  peopleNr == 0 && percent != 0
+                    ? { display: "block" }
+                    : { display: "none" }
                 }
               >
                 Can't be zero
@@ -213,11 +211,14 @@ function App() {
               <input
                 className="pr-4 flex w-full text-Very-dark-cyan"
                 style={
-                  peopleNr == 0
+                  peopleNr == 0 && percent != 0
                     ? { borderColor: "var(--error)" }
                     : { borderColor: "var(--Very-light-grayish-cyan)" }
                 }
-                onChange={(e) => setPeopleNr(Number.parseFloat(e.target.value))}
+                onChange={(e) => {
+                  setPeopleNr(Number.parseFloat(e.target.value));
+                  handleSubmit(e);
+                }}
                 onClick={(e) => (e.target.value = null)}
                 type="text"
                 name="people"

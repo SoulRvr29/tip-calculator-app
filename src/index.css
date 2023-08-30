@@ -23,7 +23,6 @@ body {
 
 form {
   color: var(--Very-dark-cyan);
-  /* background-color: var(--Light-grayish-cyan); */
 }
 input {
   border-radius: 0.3rem;
@@ -31,7 +30,6 @@ input {
   text-align: right;
   padding: 0.2rem;
   border: 2px solid var(--Very-light-grayish-cyan);
-  /* padding-right: 1rem; */
 }
 input:hover {
   border: 2px solid var(--Strong-cyan);
