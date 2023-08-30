@@ -260,6 +260,9 @@ function App() {
             </div>
           </div>
           <button
+            style={
+              bill == 0 && peopleNr == 0 ? { opacity: "0.2" } : { opacity: "1" }
+            }
             onClick={() => resetHandler()}
             className="bg-Strong-cyan text-Very-dark-cyan text-lg w-full place-self-end"
           >
