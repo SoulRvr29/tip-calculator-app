@@ -19,6 +19,9 @@ body {
   background: var(--Light-grayish-cyan);
   color: var(--Dark-grayish-cyan);
   font-size: 1.5rem;
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
 }
 
 form {

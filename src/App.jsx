@@ -3,8 +3,8 @@ import { useState } from "react";
 function App() {
   const [bill, setBill] = useState(0);
   const [peopleNr, setPeopleNr] = useState(0);
-  const [tipAmount, setTipAmount] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [tipAmount, setTipAmount] = useState("$0.00");
+  const [total, setTotal] = useState("$0.00");
   const [percent, setPercent] = useState(0);
 
   let actualPercent = 0;
@@ -39,10 +39,12 @@ function App() {
           />
         </svg>
       </header>
-      <main className="bg-white rounded-[2rem] grid grid-cols-2 max-[700px]:grid-cols-1 mx-4 max-[700px]:mx-0">
-        <section className="bg-White m-8 max-w-[395px]">
+      <main className="bg-white rounded-[2rem] grid grid-cols-2 max-[800px]:grid-cols-1 mx-4 max-[800px]:mx-0">
+        <section className="bg-White m-8 max-w-[395px] grid content-between">
           <form action="#">
-            <label htmlFor="cost">Bill</label>
+            <label htmlFor="cost">
+              <h1 className="mb-2">Bill</h1>
+            </label>
             <div className="relative flex justify-between items-center bg-Very-light-grayish-cyan rounded-md">
               <svg
                 className="ml-4 absolute"
@@ -69,9 +71,9 @@ function App() {
               />
             </div>
           </form>
-          <div>
+          <div className="my-6 max-[800px]:my-2">
             <h2 className="mb-3 mt-7">Select Tip %</h2>
-            <form className="grid grid-cols-2 gap-4 mb-4">
+            <form className="grid grid-cols-3 max-[800px]:grid-cols-2 gap-4 mb-4">
               <button
                 style={
                   percent == 0.05
@@ -185,50 +187,52 @@ function App() {
                 placeholder="Custom"
               />
             </form>
-            <label htmlFor="people">Number of People</label>{" "}
-            <div className="relative flex justify-between items-center bg-Very-light-grayish-cyan rounded-md">
-              <span
-                className="hidden absolute right-0 -top-7 text-error"
-                style={
-                  peopleNr == 0 && percent != 0
-                    ? { display: "block" }
-                    : { display: "none" }
-                }
-              >
-                Can't be zero
-              </span>
-              <svg
-                className="ml-4 absolute"
-                xmlns="http://www.w3.org/2000/svg"
-                width="13"
-                height="16"
-              >
-                <path
-                  fill="#9EBBBD"
-                  d="M9.573 7.729c.406 0 .784.07 1.126.209.342.14.639.33.881.569.232.227.438.503.614.82a5.1 5.1 0 01.407.949c.097.312.178.654.242 1.016.062.359.105.699.126 1.011.02.307.031.624.031.945 0 .836-.259 1.512-.768 2.01-.504.492-1.17.742-1.98.742H2.748c-.81 0-1.477-.25-1.98-.742C.259 14.76 0 14.084 0 13.248c0-.322.01-.64.032-.945.02-.312.063-.652.126-1.01.063-.363.144-.705.242-1.017.1-.323.238-.643.407-.948.176-.318.382-.594.613-.821.243-.238.54-.43.882-.57.342-.138.72-.208 1.125-.208.16 0 .313.067.61.265.183.123.397.264.636.421.204.134.48.259.822.372.333.11.671.167 1.005.167a3.19 3.19 0 001.006-.167c.341-.113.618-.238.822-.372l.636-.42c.296-.2.45-.266.61-.266zM6.598 0C7.63 0 8.522.38 9.252 1.129s1.1 1.666 1.1 2.724c0 1.06-.37 1.976-1.1 2.725-.73.75-1.623 1.13-2.654 1.13-1.03 0-1.924-.38-2.653-1.13-.73-.749-1.1-1.666-1.1-2.725 0-1.058.37-1.975 1.1-2.724C4.675.379 5.567 0 6.598 0z"
-                />
-              </svg>
-              <input
-                className="pr-4 flex w-full text-Very-dark-cyan"
-                style={
-                  peopleNr == 0 && percent != 0
-                    ? { borderColor: "var(--error)" }
-                    : { borderColor: "var(--Very-light-grayish-cyan)" }
-                }
-                onChange={(e) => {
-                  setPeopleNr(Number.parseFloat(e.target.value));
-                  handleSubmit(e);
-                }}
-                onClick={(e) => (e.target.value = null)}
-                type="text"
-                name="people"
-                id="people"
-                placeholder="0"
+          </div>
+          <label htmlFor="people" className="mb-1">
+            Number of People
+          </label>{" "}
+          <div className="relative flex justify-between items-center bg-Very-light-grayish-cyan rounded-md">
+            <span
+              className="hidden absolute right-0 -top-7 text-error  max-[350px]:top-12 "
+              style={
+                peopleNr == 0 && percent != 0
+                  ? { display: "block" }
+                  : { display: "none" }
+              }
+            >
+              Can't be zero
+            </span>
+            <svg
+              className="ml-4 absolute"
+              xmlns="http://www.w3.org/2000/svg"
+              width="13"
+              height="16"
+            >
+              <path
+                fill="#9EBBBD"
+                d="M9.573 7.729c.406 0 .784.07 1.126.209.342.14.639.33.881.569.232.227.438.503.614.82a5.1 5.1 0 01.407.949c.097.312.178.654.242 1.016.062.359.105.699.126 1.011.02.307.031.624.031.945 0 .836-.259 1.512-.768 2.01-.504.492-1.17.742-1.98.742H2.748c-.81 0-1.477-.25-1.98-.742C.259 14.76 0 14.084 0 13.248c0-.322.01-.64.032-.945.02-.312.063-.652.126-1.01.063-.363.144-.705.242-1.017.1-.323.238-.643.407-.948.176-.318.382-.594.613-.821.243-.238.54-.43.882-.57.342-.138.72-.208 1.125-.208.16 0 .313.067.61.265.183.123.397.264.636.421.204.134.48.259.822.372.333.11.671.167 1.005.167a3.19 3.19 0 001.006-.167c.341-.113.618-.238.822-.372l.636-.42c.296-.2.45-.266.61-.266zM6.598 0C7.63 0 8.522.38 9.252 1.129s1.1 1.666 1.1 2.724c0 1.06-.37 1.976-1.1 2.725-.73.75-1.623 1.13-2.654 1.13-1.03 0-1.924-.38-2.653-1.13-.73-.749-1.1-1.666-1.1-2.725 0-1.058.37-1.975 1.1-2.724C4.675.379 5.567 0 6.598 0z"
               />
-            </div>
+            </svg>
+            <input
+              className="pr-4 flex w-full text-Very-dark-cyan"
+              style={
+                peopleNr == 0 && percent != 0
+                  ? { borderColor: "var(--error)" }
+                  : { borderColor: "var(--Very-light-grayish-cyan)" }
+              }
+              onChange={(e) => {
+                setPeopleNr(Number.parseFloat(e.target.value));
+                handleSubmit(e);
+              }}
+              onClick={(e) => (e.target.value = null)}
+              type="text"
+              name="people"
+              id="people"
+              placeholder="0"
+            />
           </div>
         </section>
-        <section className="bg-Very-dark-cyan m-8 rounded-2xl p-6 max-w-[395px] grid">
+        <section className="bg-Very-dark-cyan m-8 rounded-2xl p-9 max-[800px]:p-6 max-w-[395px] grid">
           <div id="amount" className="flex justify-between pt-4">
             <div>
               <h3 className="text-Very-light-grayish-cyan text-base">
@@ -236,19 +240,22 @@ function App() {
               </h3>
               <p className="text-Grayish-cyan text-sm">/ person</p>
             </div>
-            <div id="tip-amount" className="text-Strong-cyan text-4xl">
+            <div
+              id="tip-amount"
+              className="text-Strong-cyan text-5xl max-[800px]:text-3xl"
+            >
               {tipAmount}
             </div>
           </div>
           <div
             id="total"
-            className="flex justify-between py-8 -mt-16 max-[700px]:mt-0"
+            className="flex justify-between py-8 -mt-4 max-[800px]:mt-0"
           >
             <div>
               <h3 className="text-Very-light-grayish-cyan text-base">Total</h3>
               <p className="text-Grayish-cyan text-sm">/ person</p>
             </div>
-            <div id="total" className="text-Strong-cyan text-4xl">
+            <div className="text-Strong-cyan text-5xl max-[800px]:text-3xl">
               {total}
             </div>
           </div>
